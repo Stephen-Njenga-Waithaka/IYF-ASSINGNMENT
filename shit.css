@@ -1,0 +1,1186 @@
+/* --- 1. Root Variables (ZenithWell Color System - Light Theme) --- */
+:root {
+    /* Light Theme Colors */
+    --primary-color: #5B8C51; /* Forest Green - Brand, main CTAs */
+    --secondary-color: #FFD6A5; /* Soft Peach - Featured card background, highlights */
+    --accent-color: #7A96D4; /* Periwinkle Blue - Interactive elements, subtle details */
+
+    --background-color: #F8F8F8; /* Lightest Grey / Off-White - General page background */
+    --card-background: #FFFFFF; /* Pure White - Default card background */
+    
+    --text-color: #333333; /* Dark Charcoal - Main body text */
+    --light-text-color: #FFFFFF; /* White - For text on primary color backgrounds */
+    --link-color: var(--primary-color); /* Links will be primary color */
+    --link-hover-color: var(--accent-color); /* Links hover will be accent color */
+
+    --border-color: #E0E0E0; /* Very light grey for subtle borders */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Soft shadow */
+
+    --border-radius-card: 25px; /* Rounded corners for cards */
+    --spacing-lg: 40px; /* Large screen spacing */
+    --spacing-md: 25px; /* Medium screen spacing */
+    --spacing-sm: 15px; /* Small screen spacing */
+
+    /* NEW: Specific variable for the very light peach hero background (mimics Solus) */
+    --solus-hero-background: #FBF0E6; 
+}
+
+/* --- 2. Dark Theme Variables --- */
+body.dark-theme {
+    --primary-color: #9EC08F; /* Lighter Forest Green for dark background */
+    --secondary-color: #FFECB3; /* Softer Peach, lighter for dark */
+    --accent-color: #A0C0F0; /* Lighter Periwinkle Blue */
+
+    --background-color: #1A202C; /* Dark Blue-Grey background */
+    --card-background: #2D3748; /* Slightly lighter dark grey for cards */
+    
+    --text-color: #E2E8F0; /* Light Grey for text */
+    --light-text-color: #1A202C; /* Dark text on light elements (if any) in dark theme */
+    --link-color: var(--accent-color); /* Links in dark theme */
+    --link-hover-color: var(--primary-color); /* Links hover in dark theme */
+
+    --border-color: #4A5568; /* Darker border for dark theme */
+    --shadow-color: rgba(0, 0, 0, 0.3); /* Darker shadow */
+
+    /* Ensure decorative elements also adapt if they use these vars */
+    .decoration--heart1 { background-color: #E06060; }
+    .decoration--heart1::before, .decoration--heart1::after { background-color: #E06060; }
+    .decoration--heart2 { background-color: #FFD700; } /* Gold */
+    .decoration--heart2::before, .decoration--heart2::after { background-color: #FFD700; }
+    .decoration--watch { background-color: #8FBC8F; } /* Lighter dark green */
+    .decoration--watch::before { background-color: #FFD700; } /* Gold */
+    .decoration--leaf { background-color: #8FBC8F; } /* Lighter dark green */
+    .decoration--faq-triangle { border-bottom-color: #F79F9F; } /* Lighter red */
+
+    /* NEW: Dark theme override for hero background */
+    --solus-hero-background: #2D3748; 
+}
+
+
+/* --- 3. Basic Resets & Global Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+}
+
+/* Added: Prevents scrolling when an overlay is open */
+body.no-scroll {
+    overflow: hidden;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Common Section Padding & Styles */
+.section-padded {
+    background-color: var(--card-background); /* White/Dark card background for sections */
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+.section-padded h2 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    padding-bottom: 15px;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+.section-padded h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color); /* Accent line under headings */
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth theme transition */
+}
+
+.section-description {
+    font-size: 1.1em;
+    text-align: center;
+    max-width: 700px;
+    margin: -20px auto 30px auto; /* Adjust margin above/below description */
+    color: var(--text-color);
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+/* --- 4. Header & Navigation --- */
+header {
+    background-color: var(--background-color); /* Matches page background */
+    padding: var(--spacing-lg) var(--spacing-lg); 
+    text-align: center;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; /* Vertically center items */
+}
+
+/* Title Modifications */
+header h1 {
+    font-size: 3em; /* Larger, more prominent title */
+    color: var(--primary-color);
+    margin: 0 auto; 
+    width: 80%; 
+    text-align: center;
+    flex-shrink: 0;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-grow: 1; /* Allows nav to take available space */
+    margin-top: var(--spacing-md); /* Add space below title on larger screens */
+}
+
+nav a {
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: var(--accent-color);
+    color: var(--light-text-color);
+    text-decoration: none;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: var(--text-color); /* Inherit from text color */
+    cursor: pointer;
+    margin-left: var(--spacing-md);
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 5px;
+    flex-shrink: 0; /* Prevents button from shrinking */
+    margin-top: var(--spacing-md); /* Align with nav if stacked */
+}
+.theme-toggle:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(122, 150, 212, 0.3); /* Accent color for focus */
+}
+
+
+/* --- MODIFIED: Hero Section Styling (Matches Solus Image - No separate image div) --- */
+#home.hero-section {
+    background-color: var(--solus-hero-background); /* Very light, slightly peachy background */
+    
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius-card);
+    box-shadow: none; /* No shadow for hero */
+
+    display: flex; /* Use flex to center content */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center align all text */
+    
+    width: 80%; /* Contained width like in the Solus image */
+    min-height: 400px; /* Give it presence */
+    margin: var(--spacing-lg) auto; /* Center horizontally */
+    
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+/* Hero Text container (the main content block) */
+.hero-text {
+    max-width: 700px; /* Limit the width of the text for readability */
+    margin: 0 auto; /* Ensure it's centered if max-width is hit */
+    padding: var(--spacing-sm); /* Add some internal padding */
+}
+
+.hero-text .tagline {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Your current body font */
+    font-size: 3.5em; /* Larger, prominent heading */
+    font-weight: bold; /* Bold like in the image */
+    color: var(--text-color); /* Dark charcoal for the main text */
+    margin-bottom: 0.5em; /* Closer spacing to paragraph */
+    line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.hero-text p {
+    font-size: 1.1em; /* Standard paragraph size */
+    line-height: 1.7;
+    margin-bottom: 1.5em;
+    color: var(--text-color); /* Dark charcoal for body text */
+    transition: color 0.3s ease;
+}
+
+.hero-btn {
+    font-size: 1.1em;
+    padding: 1em 2.5em;
+    margin-top: 1em;
+    background-color: var(--primary-color); /* Forest Green for button */
+    color: var(--light-text-color); /* White text on button */
+    border-radius: 50px; /* Pill shape for the button */
+    /* Existing btn hover and transition styles apply */
+}
+
+/* Responsive Adjustments for Hero Section (simplified for no image) */
+@media (max-width: 900px) {
+    #home.hero-section {
+        width: 90%; /* Wider on smaller screens */
+    }
+
+    .hero-text .tagline {
+        font-size: 2.5em; /* Smaller heading on tablet/smaller desktop */
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-text .tagline {
+        font-size: 2em; /* Even smaller heading on very small screens */
+    }
+
+    .hero-btn {
+        font-size: 1em;
+        padding: 0.8em 2em;
+    }
+}
+
+
+/* --- 5. Services Section (formerly the main content) --- */
+#services {
+    /* Styles are mostly inherited from .section-padded */
+}
+
+/* Container for the two-column card layout */
+.card-grid-container {
+    display: grid;
+    /* LG Breakpoint: Left card is wider (approx 60/40 split) */
+    grid-template-columns: 3fr 2fr; /* Creates two columns with these proportions */
+    gap: var(--spacing-lg); /* Spacing between cards */
+    margin-bottom: var(--spacing-lg); /* Spacing below this section */
+}
+
+/* Container for the full-width card */
+.card-section--full-width {
+    display: block; /* Ensures it takes full width by default */
+}
+
+/* --- 6. Card General Styling --- */
+.card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-lg);
+    box-shadow: 0 10px 30px var(--shadow-color); /* Soft shadow */
+    position: relative; /* For positioning decorative elements */
+    overflow: hidden; /* To keep decorations inside rounded corners */
+    display: flex; /* Use flex to align content if needed */
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button to bottom */
+    min-height: 350px; /* Approximate height based on mockup, adjust as needed */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+/* Specific styling for the featured (left) card */
+.card--featured {
+    background-color: var(--secondary-color); /* Soft Peach background */
+    transition: background-color 0.3s ease;
+}
+
+.card .card-content {
+    z-index: 1; /* Ensure content is above decorations */
+    position: relative;
+}
+
+.card h3 { /* Changed h2 to h3 for semantic hierarchy within cards */
+    font-size: 2em; /* Heading size */
+    color: var(--text-color); /* Default dark text for headings */
+    margin-bottom: 0.6em;
+    line-height: 1.2;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+.card--featured h3 {
+    color: var(--text-color); /* Text on peach background should be dark */
+}
+
+.card p {
+    font-size: 1.1em;
+    color: var(--text-color);
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+/* Button Styling */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--light-text-color); /* White text on primary button */
+    padding: 0.8em 1.8em;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Smooth theme transition */
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #4A7A45; /* Slightly darker green */
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+body.dark-theme .btn:hover { /* Dark theme specific hover */
+    background-color: #7AA06D; /* Slightly darker for dark theme */
+}
+
+
+.btn-secondary { /* For close button in overlays */
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+.btn-secondary:hover {
+    background-color: #ccc;
+    transform: none;
+}
+body.dark-theme .btn-secondary {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+body.dark-theme .btn-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--light-text-color);
+}
+
+
+/* --- 7. Decorative Elements (CSS Shapes) --- */
+/* These are simplified representations of the graphical elements in your mockup */
+/* Colors defined directly here for light theme, will be overridden in dark-theme class */
+.decoration {
+    position: absolute;
+    z-index: 0; /* Keep decorations behind content */
+    opacity: 0.7;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.decoration--heart1 {
+    width: 60px;
+    height: 60px;
+    background-color: #FF7070; /* A soft red for the heart */
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    top: 50px;
+    right: 50px;
+}
+/* For heart shape to work with pseudo-elements for the full shape */
+.decoration--heart1::before, .decoration--heart1::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #FF7070;
+    border-radius: 50%;
+}
+.decoration--heart1::before {
+    top: -50%;
+    left: 0;
+}
+.decoration--heart1::after {
+    left: 50%;
+    top: 0;
+}
+
+.decoration--heart2 { /* The golden-orange heart */
+    width: 80px;
+    height: 80px;
+    background-color: #FFBF00; /* Golden orange */
+    border-radius: 50%;
+    transform: rotate(45deg);
+    bottom: 30px;
+    right: 30px;
+    opacity: 0.8;
+}
+/* For heart shape to work with pseudo-elements for the full shape */
+.decoration--heart2::before, .decoration--heart2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #FFBF00;
+    border-radius: 50%;
+}
+.decoration--heart2::before {
+    top: -50%;
+    left: 0;
+}
+.decoration--heart2::after {
+    left: 50%;
+    top: 0;
+}
+
+.decoration--dot1 {
+    width: 15px;
+    height: 15px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    bottom: 100px;
+    left: 50px;
+    opacity: 0.6;
+}
+
+.decoration--blob1 {
+    width: 100px;
+    height: 100px;
+    background-color: var(--accent-color);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    top: -20px;
+    right: -20px;
+    opacity: 0.4;
+}
+
+.decoration--watch {
+    width: 120px;
+    height: 120px;
+    background-color: #6B8E23; /* Darker green */
+    border-radius: 50%;
+    bottom: -30px;
+    right: -30px;
+    opacity: 0.6;
+}
+.decoration--watch::before { /* Watch screen */
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background-color: #FFBF00; /* Golden orange */
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
+}
+
+.decoration--leaf {
+    width: 60px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 0 50% 50% 0;
+    transform: rotate(45deg);
+    top: 20px;
+    right: 150px;
+    opacity: 0.7;
+}
+
+.decoration--dot2 {
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    bottom: 50px;
+    left: 100px;
+    opacity: 0.8;
+}
+
+/* --- 8. Testimonials Section --- */
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.testimonial-card {
+    background-color: var(--card-background);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 5px solid var(--accent-color); /* Accent border */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth theme transition */
+}
+
+.testimonial-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--primary-color);
+    transition: border-color 0.3s ease; /* Smooth theme transition */
+}
+
+.testimonial-card blockquote {
+    font-size: 1.1em;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    position: relative;
+    padding: 0 10px;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+.testimonial-card blockquote::before, .testimonial-card blockquote::after {
+    font-size: 3em;
+    color: var(--accent-color);
+    position: absolute;
+    line-height: 0;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+.testimonial-card blockquote::before {
+    content: "“";
+    left: 0;
+    top: -10px;
+}
+.testimonial-card blockquote::after {
+    content: "”";
+    right: 0;
+    bottom: -10px;
+}
+
+.testimonial-card .client-name {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: auto;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+/* --- 9. About Section --- */
+#about h3 {
+    color: var(--primary-color);
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 5px;
+    display: inline-block;
+    transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transition */
+}
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    text-align: center;
+}
+
+.about-highlights div {
+    background-color: var(--background-color); /* Lighter background for these cards */
+    padding: var(--spacing-md);
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth theme transition */
+}
+.about-highlights h4 {
+    color: var(--accent-color);
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+/* --- 10. Resources Section --- */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.resource-card {
+    background-color: var(--card-background);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+.resource-card h4 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+.resource-card p {
+    font-size: 1em;
+    margin-bottom: 1em;
+    flex-grow: 1; /* Pushes read more link to bottom */
+    color: var(--text-color);
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+.resource-card .read-more {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.95em;
+    margin-top: 1em;
+    display: block;
+    text-align: right;
+}
+.resource-card .read-more:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+
+/* --- 11. FAQ Section (UPDATED) --- */
+/* Overall FAQ section styling from .section-padded applies */
+
+.faq-content-wrapper {
+    display: flex;
+    gap: var(--spacing-lg); /* Space between illustration and FAQs */
+    align-items: flex-start; /* Align items to the top */
+    margin-top: var(--spacing-lg);
+}
+
+.faq-illustration {
+    flex-shrink: 0; /* Prevent illustration from shrinking */
+    width: 300px; /* Adjust width as needed for your image */
+    background-color: var(--secondary-color); /* Background for the illustration area */
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-md); /* Padding inside the illustration box */
+    position: relative; /* For absolute positioning of inner elements */
+    overflow: hidden; /* Keep shapes inside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 450px; /* Fixed height for consistency, adjust if content varies */
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-illustration .faq-character {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below image */
+    z-index: 1; /* Ensure character is above shapes */
+    position: relative; /* For z-index to work */
+}
+
+/* Decorative elements for the FAQ illustration */
+.decoration--faq-blob {
+    width: 120px;
+    height: 120px;
+    background-color: var(--accent-color);
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    opacity: 0.3;
+    transform: rotate(15deg);
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+.decoration--faq-dot {
+    width: 25px;
+    height: 25px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.6;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+.decoration--faq-triangle {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid #FF7070; /* A red color */
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%) rotate(45deg);
+    opacity: 0.4;
+    transition: border-bottom-color 0.3s ease, opacity 0.3s ease;
+}
+
+.faq-items-list {
+    flex-grow: 1; /* Allows the FAQ list to take remaining space */
+    width: 100%; /* Default to full width for stacking on smaller screens */
+}
+
+.faq-item {
+    background-color: var(--background-color); /* Light background for each FAQ item */
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    margin-bottom: 12px; /* Space between items */
+    overflow: hidden; /* Crucial for max-height transition */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: all 0.3s ease; /* Smooth transition for background, border, shadow */
+}
+
+.faq-item.active {
+    border-color: var(--primary-color); /* Highlight active item */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    padding: 18px 25px; /* Padding for the question area */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    font-size: 1.15em;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.faq-question:hover {
+    background-color: rgba(var(--primary-color), 0.05); /* Subtle hover background */
+    color: var(--primary-color);
+}
+
+.faq-question h3 {
+    margin: 0; /* Remove default h3 margins */
+    line-height: 1.4;
+    flex-grow: 1; /* Allow h3 to take available space */
+    color: inherit; /* Inherit color from parent button */
+    transition: color 0.2s ease;
+}
+
+.faq-icon {
+    font-size: 1.2em;
+    color: var(--accent-color);
+    margin-left: 20px; /* Space between text and icon */
+    transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Rotate icon when FAQ item is active */
+.faq-item.active .faq-icon {
+    transform: rotate(45deg); /* Plus sign becomes an 'x' */
+    color: var(--primary-color);
+}
+
+.faq-answer {
+    max-height: 0; /* Initially hidden */
+    overflow: hidden;
+    padding: 0 25px; /* Horizontal padding, no vertical padding when hidden */
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.4s ease;
+    opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px; /* A value larger than the max possible height of content */
+    padding-bottom: 20px; /* Vertical padding when expanded */
+    opacity: 1;
+}
+
+.faq-answer p {
+    color: var(--text-color);
+    margin: 0; /* Remove default paragraph margins */
+    line-height: 1.6;
+}
+
+
+/* --- 12. Contact Form --- */
+#contact-form {
+    display: grid;
+    gap: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+#contact-form label {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.2em;
+    display: block;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form input[type="subject"],
+#contact-form textarea {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1em;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px var(--accent-color);
+}
+
+#contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#contact-form button {
+    width: 100%;
+    margin-top: 1em;
+}
+
+.contact-info-direct {
+    text-align: center;
+    margin-top: 1.5em;
+    font-size: 1.1em;
+    color: var(--text-color);
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+.contact-info-direct a {
+    font-weight: 600;
+}
+
+/* --- 13. Overlay Sections (Book Session & My Sessions) --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Ensure it's above everything else */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    background-color: var(--card-background);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 15px 40px var(--shadow-color);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    transform: translateY(20px); /* Start slightly below center */
+    transition: transform 0.3s ease;
+    max-height: 90vh; /* Limit height for scrollability */
+    overflow-y: auto; /* Enable vertical scrolling */
+    color: var(--text-color);
+}
+
+.overlay.visible .overlay-content {
+    transform: translateY(0); /* Slide into place */
+}
+
+.overlay-content h2 {
+    font-size: 2em;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.overlay-content h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 5px;
+}
+
+.overlay-description {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.session-booking-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.session-booking-form label {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.2em;
+    display: block;
+}
+
+.session-booking-form input,
+.session-booking-form select {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.session-booking-form input:focus,
+.session-booking-form select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px var(--accent-color);
+}
+
+.session-booking-form button.btn {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.close-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.close-overlay:hover {
+    background-color: var(--border-color);
+    color: var(--primary-color);
+}
+body.dark-theme .close-overlay {
+    color: var(--light-text-color);
+}
+body.dark-theme .close-overlay:hover {
+    background-color: var(--background-color);
+    color: var(--accent-color);
+}
+
+/* My Sessions Specific Styles */
+#session-list {
+    margin-top: var(--spacing-md);
+    max-height: 400px; /* Limit height of list */
+    overflow-y: auto; /* Make list scrollable */
+    padding-right: 10px; /* Space for scrollbar */
+}
+
+.session-item {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.session-item p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.session-item .session-info span {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+.session-item .session-info small {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.delete-session {
+    background: none;
+    border: none;
+    color: #ff4d4d; /* Red color for delete icon */
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.delete-session:hover {
+    color: #cc0000;
+    transform: scale(1.1);
+}
+
+.no-sessions-msg {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.7;
+    padding: var(--spacing-md);
+    font-style: italic;
+}
+
+
+/* --- 14. Footer Styling --- */
+footer {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: var(--spacing-lg) var(--spacing-lg);
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: var(--spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    padding: 0 15px;
+}
+
+.footer-section h4 {
+    font-size: 1.3em;
+    margin-bottom: 1rem;
+    color: var(--secondary-color); /* Secondary color for footer headings */
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease; /* Smooth theme transition */
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--light-text-color);
+    transition: background-color 0.3s ease; /* Smooth theme transition */
+}
+
+.footer-section p, .footer-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95em;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5em;
+}
+
+.footer-section a {
+    color: var(--light-text-color);
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* Center social links in their section */
+}
+
+.social-links a {
+    color: var(--light-text-color);
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+
+
+/* Copyright text */
+footer > p { /* Directly targets the copyright paragraph */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.85em;
+    transition: border-color 0.3s ease;
+}
